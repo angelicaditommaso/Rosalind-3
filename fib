@@ -1,1 +1,7 @@
+def fibo_loop (months, offspring):
+    parent, child= 1,1
+    for itr in range(months-1):
+      child, parent=parent, parent+(child*offspring)
+    return child
 
+print(fibo_loop(34,3))
