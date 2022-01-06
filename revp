@@ -1,0 +1,35 @@
+from Bio import SeqIO
+
+def reverse(s):
+    s = s[::-1]
+    reverse_s = ''
+    for i in range(len(s)):
+        if s[i] == 'A':
+            reverse_s += 'T'
+        elif s[i] == 'T':
+            reverse_s += 'A'
+        elif s[i] == 'G':
+            reverse_s += 'C'
+        elif s[i] == 'C':
+            reverse_s += 'G'
+    return reverse_s
+
+
+def palindrome(s):
+    size=len(s)
+    for i in range(size):
+        for j in range(4,13,1):
+            if s[i:i+j] == reverse(s[i:i+j]) and (i+j <= len(s)):
+                print(i+1, j)
+                
+
+if __name__ == "__main__":
+    
+
+    seq_name, seq_string = [], []
+    with open ("C:\\Users\\ngeli\\Desktop\\Rosalind\\revpdata.txt",'r') as fa:
+        for seq_record  in SeqIO.parse(fa,'fasta'):
+            seq_name.append(str(seq_record.name))
+            seq_string.append(str(seq_record.seq))
+    s = seq_string[0]
+    palindrome(s)
