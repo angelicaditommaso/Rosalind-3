@@ -1,0 +1,25 @@
+import numpy as np
+import Bio.SeqIO
+
+seqs = [str(seq.seq) for seq in Bio.SeqIO.parse('rosal.txt', 'fasta')]
+
+# shortest
+ref = seqs[np.argmin([len(i) for i in seqs])] 
+#print(ref)
+
+def checkMotif(motif, seqs):
+    for seq in seqs:
+        if motif not in seq:
+            return(False)
+    return(True)
+
+longest = ''
+for start_ind in range(len(ref)):
+    for end_ind in range(len(ref), start_ind, -1):
+        motif = ref[start_ind:end_ind]
+        if len(motif) <= len(longest):
+            break
+        if checkMotif(motif, seqs) and len(motif) > len(longest):
+            longest = motif
+
+print(longest)
