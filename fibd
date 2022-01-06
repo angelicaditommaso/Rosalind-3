@@ -1,0 +1,23 @@
+# Calculate the pairs of rabbits that will remain after the n-th month 
+# if all rabbits live for m months
+# n is the n-th month.
+# in the first month, the num of rabbit is 1. 
+
+def mortal_fibo (n, m):
+       
+    num_list = [0, 1]
+    
+    for i in range(1, n+1, 1):
+        if i < m:
+            num_list.append(num_list[i] + num_list[i-1])
+        if i == m:
+            num_list.append(num_list[i] + num_list[i-1] - num_list[i-m+1])
+        if i > m:
+            num_list.append(num_list[i] + num_list[i-1] - num_list[i-m])
+    
+    return num_list[n]
+
+if __name__ == "__main__":
+    with open("C:\\Users\\ngeli\\Desktop\\Rosalind\\fibd1.txt", "r") as f:
+        n, m = map(int, f.readline().strip().split())
+        print(mortal_fibo(n, m))
