@@ -1,0 +1,71 @@
+def longest_increasing(nums):
+    lis1 = [1 for j in range(len(nums))]
+    lis2 = [-1 for k in range(len(nums))]
+    
+    for x in range(1, len(nums)):
+        for y in range(x):
+            if nums[y] < nums[x] and lis1[y] >= lis1[x]:
+                lis1[x] = lis1[y] + 1
+                lis2[x] = y
+    max_lis = 0
+    max_lis_idx = -1
+    for z in range(len(nums)):
+        if lis1[z] > max_lis:
+            max_lis = lis1[z]
+            max_lis_idx = z
+   
+    lis_elts = []
+    while max_lis_idx != -1:
+        lis_elts.append(nums[max_lis_idx])
+        max_lis_idx = lis2[max_lis_idx]
+   
+    lis_elts.reverse()
+    for w in lis_elts:
+        print(w, end=' ')
+    print()
+
+
+def longest_decreasing(nums):
+    lds1 = [1 for j in range(len(nums))]
+    lds2 = [-1 for k in range(len(nums))]
+    
+    for x in range(1, len(nums)):
+        for y in range(x):
+            if nums[y] > nums[x] and lds1[y] >= lds1[x]:
+                lds1[x] = lds1[y] + 1
+                lds2[x] = y
+    max_lds = 0
+    max_lds_idx = -1
+    for z in range(len(nums)):
+        if lds1[z] > max_lds:
+            max_lds = lds1[z]
+            max_lds_idx = z
+            
+    lds_elts = []
+    while max_lds_idx != -1:
+        lds_elts.append(nums[max_lds_idx])
+        max_lds_idx = lds2[max_lds_idx]
+        
+    lds_elts.reverse()
+    for w in lds_elts:
+        print(w, end=' ')
+    print()
+
+
+def main():
+    file = open("lgis.txt", "r")
+    file.readline()
+    nums = file.readline().split(' ')
+    file.close()
+    
+    for i in range(len(nums)):
+        nums[i] = nums[i].replace('\n', '')
+        nums[i] = int(nums[i])
+   
+    longest_increasing(nums)
+    longest_decreasing(nums)
+    return
+
+
+if __name__ == "__main__":
+    main()
