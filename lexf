@@ -1,0 +1,10 @@
+import itertools
+
+with open("C:\\Users\\ngeli\\Desktop\\Rosalind\\lx.txt", 'r') as input_data:
+    letters, n = input_data.readlines()
+    letters = ''.join(letters.split())
+    n = int(n)
+    
+result = list(itertools.product(letters, repeat = n))
+
+print("\n".join(["".join(x) for x in result]))
